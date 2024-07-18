@@ -7,3 +7,5 @@ def create_app():
     app.config.from_pyfile("config.py")
     app.register_blueprint(state_bp)
     return app
+
+
