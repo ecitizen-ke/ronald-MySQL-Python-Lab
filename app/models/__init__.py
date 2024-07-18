@@ -15,9 +15,9 @@ class State:
         self.db.cursor.execute(query)
 
         # Retrieve the user record in the database: returns a tuple
-        results = self.db.cursor.fetchall()
-        if results:
-            for row in results:
+        data = self.db.cursor.fetchall()
+        if data:
+            for row in data:
                 state ={
                     'id': row[0],
                     'name': row[1],
@@ -75,30 +75,30 @@ class State:
         """List all records from table states where name starts with 'A'"""
         query = "SELECT * FROM states WHERE name LIKE 'A%'"
         self.db.cursor.execute(query)
-        results= self.db.cursor.fetchall()
-        if results:
-            for row in results:
+        data= self.db.cursor.fetchall()
+        if data:
+            for row in data:
                 state ={}
          
         # Close cursor
         self.db.cursor.close()
         # Close connection
         self.db.conn.close()
-        return results  
+        return data  
     
     
     def filter_states_by_name_asc(self):
         query = "SELECT * FROM states ORDER BY name ASC "
         self.db.cursor.execute(query)
-        results= self.db.cursor.fetchall()
-        for row in results:
+        data= self.db.cursor.fetchall()
+        for row in data:
             print(row)
           
         # Close cursor
         self.db.cursor.close()
         # Close connection
         self.db.conn.close()
-        return results 
+        return data 
         
     def update_states_population(self, id, population):
         """Update the states population"""
@@ -143,9 +143,9 @@ class State:
         """
         query = "SELECT * FROM states WHERE population =(SELECT MAX(population))"
         self.db.cursor.execute(query)
-        results= self.db.cursor.fetchone()
-        if results:
-            return results
+        data= self.db.cursor.fetchone()
+        if data:
+            return data
         # Close cursor
         self.db.cursor.close()
         # Close connection
@@ -155,21 +155,21 @@ class State:
         """ search for a state by name in the database """
         query = "SELECT * FROM states WHERE name = %s"
         self.db.cursor.execute(query, [name])
-        results= self.db.cursor.fetchone()
+        data= self.db.cursor.fetchone()
         # Close cursor
         self.db.cursor.close()
         # Close connection
         self.db.conn.close()
-        return results
+        return data
     def list_state_capitals(self):
         """
         lists all state capitals from the database
         """
         query = "SELECT capital FROM states"
         self.db.cursor.execute(query)
-        results= self.db.cursor.fetchall()
-        if results:
-             for row in results:
+        data= self.db.cursor.fetchall()
+        if data:
+             for row in data:
                  capital ={
                 'capital': row[0]
                  }
@@ -179,7 +179,7 @@ class State:
         self.db.cursor.close()
         # Close connection
         self.db.conn.close()
-        return results 
+        return data 
     def average_population(self):
         """
         calculates the average population of states in the database
@@ -201,13 +201,13 @@ class State:
         """
         query = "SELECT population FROM states WHERE population BETWEEN 1000000 AND 5000000"
         self.db.cursor.execute(query)
-        results= self.db.cursor.fetchall()
+        data= self.db.cursor.fetchall()
        
         # Close cursor
         self.db.cursor.close()
         # Close connection
         self.db.conn.close()    
-        return len(results)
+        return len(data)
     
     def join_states_capital(self):
       

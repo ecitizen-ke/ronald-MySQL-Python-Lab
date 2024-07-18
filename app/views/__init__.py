@@ -13,7 +13,7 @@ def getStates():
     else:
         return jsonify({"message": "states not displayed", "status": 400})
 
-@state_bp.route("/state/register", methods=["POST"])
+@state_bp.route("/api/v1/states/create", methods=["POST"])
 def register():
     # initialize the user object
     state = State()
@@ -34,7 +34,7 @@ def register():
         return jsonify({"message": "State already exists in the database.", "status": 500})
     return jsonify({"message": "user registered successfully", "status": 201})
 
-@state_bp.route("/states/filter", methods=["GET"])
+@state_bp.route("/api/v1states/filter", methods=["GET"])
 def filterStates_name_A():
     """
     filter states by names starting with letter A
@@ -47,7 +47,7 @@ def filterStates_name_A():
     else:
         return jsonify({"message": "states not displayed", "status": 400})
 
-@state_bp.route("/states/filter/name_asc", methods=["GET"])
+@state_bp.route("/api/v1/states/filter/name_asc", methods=["GET"])
 def filterStates_asc():
     """
     filter states by name in ascending order
@@ -57,7 +57,7 @@ def filterStates_asc():
     states= state.filter_states_by_name_asc()
     return jsonify(states)
 
-@state_bp.route("/states/update/population", methods=["PATCH"])
+@state_bp.route("/api/v1/states/update/population", methods=["PATCH"])
 def update_population_by_id():
     state = State()
     data = request.get_json()
@@ -66,7 +66,7 @@ def update_population_by_id():
     states = state.update_states_population(id, population)
     return states
 
-@state_bp.route("/states/delete", methods=["DELETE"])
+@state_bp.route("/api/v1/states/delete", methods=["DELETE"])
 def deleteState():
     state = State()
     data = request.get_json()
@@ -76,7 +76,7 @@ def deleteState():
         return jsonify({"message": "State deleted successfully", "status": 200})
     else:
         return jsonify({"message": "State not found", "status": 404})
-@state_bp.route("/states/populous", methods=["GET"])
+@state_bp.route("/api/v1/states/populous", methods=["GET"])
 def get_populous_state():
     state = State()
     popular_state = state.get_highest_populated_state()
@@ -85,7 +85,7 @@ def get_populous_state():
     else:
         return jsonify({"message": "No state found with the highest population", "status": 404})
 
-@state_bp.route("/states/search", methods=["GET"])
+@state_bp.route("/api/v1/states/search", methods=["GET"])
 def search_state():
     """search state by name"""
     state =State()
@@ -97,7 +97,7 @@ def search_state():
     else:
         return jsonify({"message": "state not found", "code": 404})
         
-@state_bp.route("/states/capital", methods=["GET"])
+@state_bp.route("/api/v1/states/capital", methods=["GET"])
 def states_capital():
     state = State()
     capitals = state.list_state_capitals()
@@ -106,7 +106,7 @@ def states_capital():
     else:
         return jsonify({"message": "capitals not displayed", "status": 400})
 
-@state_bp.route("/states/average_population", methods=["GET"])
+@state_bp.route("/api/v1/states/average_population", methods=["GET"])
 def average_states_population():
     """
     this function calculate and return the average population of states
@@ -118,7 +118,7 @@ def average_states_population():
     else:
         return jsonify({"message": "average population not displayed", "status": 400})
 
-@state_bp.route("/states/range_population", methods=["GET"])
+@state_bp.route("/api/v1/states/range_population", methods=["GET"])
 def range_of_population():
     """
     that counts the number of states within 
@@ -131,7 +131,7 @@ a population between 1,000,000 and 5,000,000 people
     else:
         return jsonify({"message": "range of population not displayed", "status": 400})
 
-@state_bp.route("/states/join_state_capital", methods=["GET"])
+@state_bp.route("/api/v1/states/join_state_capital", methods=["GET"])
 def joinStateCapital():
     join_record = State().join_states_capital()
     if join_record:
@@ -140,7 +140,7 @@ def joinStateCapital():
         return jsonify({"message": "joined records not displayed", "status": 400})
    
 
-@state_bp.route("/states/searchByName",methods=["POST"])
+@state_bp.route("/api/v1/states/searchByName",methods=["POST"])
 def searchStateByName():
     """
     this functions searches for state details by name
@@ -158,7 +158,7 @@ def searchStateByName():
     else:
         return jsonify({"message": "search unsuccessful", "status": 400,"result":result})
     
-@state_bp.route("/states/admitedBtw1750and1850",methods=["GET"])
+@state_bp.route("/api/v1/states/admitedBtw1750and1850",methods=["GET"])
 def stateAdmittedBetween1750and1850():  
     """
     this functions searches for state details admitted between 1750 and 1850
